@@ -1,0 +1,9 @@
+.custom-input {
+  border-color: #2f3645;
+  border-width: 2px;
+}
+
+.custom-input:focus {
+  border-color: #2f3645;
+  outline: none; /* Optionally remove the default focus outline */
+}

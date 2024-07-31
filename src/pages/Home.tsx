@@ -11,7 +11,7 @@ const Home = () => {
             <input
               type="text"
               name="task"
-              className="form-control"
+              className="form-control custom-input"
             />
             <Button
               sx={{
