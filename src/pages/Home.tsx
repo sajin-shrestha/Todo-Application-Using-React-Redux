@@ -1,6 +1,10 @@
 import { Button } from '@mui/material'
+import { useState } from 'react'
+import Todo from './Todo'
 
 const Home = () => {
+  const [data, setData] = useState('')
+
   return (
     <>
       <div className="container">
@@ -11,7 +15,11 @@ const Home = () => {
             <input
               type="text"
               name="task"
+              value={data}
               className="form-control custom-input"
+              onChange={(e) => {
+                setData(e.target.value)
+              }}
             />
             <Button
               sx={{
@@ -29,6 +37,8 @@ const Home = () => {
               Add
             </Button>
           </div>
+
+          <Todo />
         </section>
       </div>
     </>
