@@ -1,5 +1,6 @@
-export const Add = (items) => {
-    return {
-        type: "ADD_DATA"
-    }
+export const Add = (items: string) => {
+  return {
+    type: 'ADD_DATA',
+    payload: items,
+  }
 }
