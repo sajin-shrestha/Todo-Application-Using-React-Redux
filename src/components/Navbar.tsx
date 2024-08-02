@@ -29,7 +29,7 @@ export default function Navbar() {
             component="div"
             sx={{ flexGrow: 1, color: '#EEEDEB', textAlign: 'center' }}
           >
-            Todo Application
+            QuickTask Todo Application
           </Typography>
         </Toolbar>
       </AppBar>
