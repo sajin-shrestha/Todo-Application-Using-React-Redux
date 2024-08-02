@@ -1,9 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* body {
+  font-family: 'Roboto', sans-serif;
+} */
+
 .custom-input {
   border-color: #2f3645;
   border-width: 2px;
 }
-
 .custom-input:focus {
   border-color: #2f3645;
   outline: none; /* Optionally remove the default focus outline */
+}
+
+/* Todo.css */
+
+.custom-modal .modal-content {
+  border-radius: 10px;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.custom-modal .modal-header {
+  border-bottom: none;
+}
+
+.custom-modal .modal-title {
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.custom-modal .modal-body {
+  font-size: 1rem;
+  color: #555;
+}
+
+.custom-modal .modal-footer {
+  border-top: none;
+  justify-content: center;
+}
+
+.custom-modal .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.custom-modal .btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
 }
