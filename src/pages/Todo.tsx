@@ -4,9 +4,12 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import { TypedUseSelectorHook, useSelector } from 'react-redux'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { useMediaQuery } from 'react-responsive'
+import Swal from 'sweetalert2'
+import { Remove } from '../redux/actions/actions'
 import { RootState } from '../store'
+import { swalWithBootstrapButtons } from '../utils/swal'
 import { truncateString } from '../utils/utils'
 
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -24,10 +27,36 @@ const Todo = () => {
   console.log(User_data)
 
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [showData, setShowData] = useState('')
+  const [showData, setShowData] = useState<string>('')
 
+  const dispatch = useDispatch()
   const remove = (id: number) => {
-    console.log(id)
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          dispatch(Remove(id)) // Dispatch the remove action
+          swalWithBootstrapButtons.fire({
+            title: 'Deleted!',
+            text: 'Task has been deleted.',
+            icon: 'success',
+          })
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire({
+            title: 'Cancelled',
+            text: 'Your task is safe :)',
+            icon: 'error',
+          })
+        }
+      })
   }
 
   return (
@@ -37,6 +66,9 @@ const Todo = () => {
         style={todoContainerStyle}
       >
         {User_data.map((element, index) => {
+          const displayElement =
+            typeof element === 'string' ? element : String(element)
+
           return (
             <div
               key={index}
@@ -56,7 +88,7 @@ const Todo = () => {
                   textOverflow: 'ellipsis',
                 }}
               >
-                {truncateString(element, 60)}
+                {truncateString(displayElement, 60)}
               </li>
               <div className="edit_dlt col-lg-3 py-2 d-flex justify-content-end align-items-center">
                 <ModeEditIcon
@@ -77,7 +109,7 @@ const Todo = () => {
                 <RemoveRedEyeIcon
                   onClick={() => {
                     setShowModal(true)
-                    setShowData(element)
+                    setShowData(displayElement)
                   }}
                   style={{ color: '#1dd1a1', cursor: 'pointer' }}
                 />

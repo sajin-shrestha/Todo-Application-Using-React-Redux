@@ -53,5 +53,6 @@
 }
 .modal-body-scrollable {
   max-height: 400px; /* Adjust the height as needed */
+  overflow-x: hidden;
   overflow-y: auto;
 }

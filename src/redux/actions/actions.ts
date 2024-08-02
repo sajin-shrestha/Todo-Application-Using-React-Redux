@@ -4,3 +4,9 @@ export const Add = (items: string) => {
     payload: items,
   }
 }
+export const Remove = (id: number) => {
+  return {
+    type: 'REMOVE_DATA',
+    payload: id,
+  }
+}
