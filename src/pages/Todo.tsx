@@ -20,12 +20,15 @@ const Todo = () => {
     width: isLargeScreen ? '80%' : '100%', // Change width based on screen size
   }
 
-  // const { User_data } = useSelector((state) => state.todoReducers)
   const { User_data } = useTypedSelector((state) => state.todoReducers)
   console.log(User_data)
 
   const [showModal, setShowModal] = useState<boolean>(false)
   const [showData, setShowData] = useState('')
+
+  const remove = (id: number) => {
+    console.log(id)
+  }
 
   return (
     <>
@@ -36,26 +39,41 @@ const Todo = () => {
         {User_data.map((element, index) => {
           return (
             <div
+              key={index}
               className="todo_container d-flex justify-content-between align-items-center px-2 mb-2"
               style={{
-                background: '#E6B9A6',
+                background: '#a2a8ae',
                 borderRadius: '8px',
                 cursor: 'pointer',
-              }}
-              onClick={() => {
-                setShowModal(true)
-                setShowData(element)
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word',
               }}
             >
               <li
-                key={index}
-                style={{ listStyle: 'none' }}
+                style={{
+                  listStyle: 'none',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
               >
                 {truncateString(element, 60)}
               </li>
               <div className="edit_dlt col-lg-3 py-2 d-flex justify-content-end align-items-center">
-                <ModeEditIcon style={{ color: '#3c40c6', cursor: 'pointer' }} />
-                <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
+                <ModeEditIcon
+                  style={{
+                    color: '#3c40c6',
+                    cursor: 'pointer',
+                    marginRight: '12px',
+                  }}
+                />
+                <DeleteIcon
+                  style={{
+                    color: 'red',
+                    cursor: 'pointer',
+                    marginRight: '12px',
+                  }}
+                  onClick={() => remove(index)}
+                />
                 <RemoveRedEyeIcon
                   onClick={() => {
                     setShowModal(true)
@@ -76,15 +94,13 @@ const Todo = () => {
           <Modal.Header closeButton>
             <Modal.Title className="text-center">Task</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="modal-body-scrollable">
             <p>{showData}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button
               variant="secondary"
-              onClick={() => {
-                setShowModal(false)
-              }}
+              onClick={() => setShowModal(false)}
             >
               Close
             </Button>

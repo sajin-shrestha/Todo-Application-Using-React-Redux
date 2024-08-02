@@ -51,3 +51,7 @@
   background-color: #5a6268;
   border-color: #545b62;
 }
+.modal-body-scrollable {
+  max-height: 400px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
